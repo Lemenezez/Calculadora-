@@ -1,1 +1,3 @@
-git add README.md
+Projeto Git.
+
+Calculadora com HTML, CSS e JS.
