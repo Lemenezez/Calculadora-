@@ -1,43 +1,31 @@
 const display = document.getElementById('display');
-const buttons = document.getElementById('.btn');
+const buttons = document.querySelectorAll('.btn');
+
 
 let currentValue = '';
-let previuosValue = '';
+let previousValue = ''; 
 let operator = '';
 
-function updateDisplay(value){
-  display.value = value;
+
+function updateDisplay(value) {
+    display.value = value;
 }
 
-buttons.forEach( button =>{
-  buttons.addEventListener('click', () => {
-  const buttonValue = button.textContent;
 
-  if( !isNaN(buttonValue) || buttonValue === '.'){
-    currentValue += buttonValue
-    updateDisplay(currentValue);
+function calculate() {
+  if (previousValue && currentValue && operator) {
+      switch (operator) {
+          case '+':
+              return parseFloat(previousValue) + parseFloat(currentValue);
+          case '-':
+              return parseFloat(previousValue) - parseFloat(currentValue);
+          case '*':
+              return parseFloat(previousValue) * parseFloat(currentValue);
+          case '/':
+              return parseFloat(previousValue) / parseFloat(currentValue);
+          default:
+              return '';
+      }
   }
-
-  if(['+', '-', '*', '/'].includes(buttonValue)){
-    previuosValue = currentValue;
-    operator = buttonValue;
-    currentValue = '';
-  }
-
-  if(buttonValue === '='){
-    if(currentValue && previuosValue && operator){
-      const result = eval(`${previuosValue} ${operator} ${currentValue}`);
-      updateDisplay(result);
-      currentValue = result;
-      previuosValue = '';
-      operator = '';
-    }
-  }
-
-  if(buttonValue === 'C'){
-    currentValue ='';
-    previuosValue = '';
-    operator = '';
-  }
-});
-});
+  return '';
+}
