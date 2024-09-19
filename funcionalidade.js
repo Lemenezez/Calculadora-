@@ -54,4 +54,4 @@ buttons.forEach(button => {
           updateDisplay('');
       }
   });
-})
+});
