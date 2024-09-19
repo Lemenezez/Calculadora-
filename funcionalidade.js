@@ -29,3 +29,29 @@ function calculate() {
   }
   return '';
 }
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+      const buttonValue = button.textContent;
+
+      if (!isNaN(buttonValue) || buttonValue === '.') {
+          currentValue += buttonValue;
+          updateDisplay(currentValue);
+      } else if (['+', '-', '*', '/'].includes(buttonValue)) {
+          previousValue = currentValue;
+          operator = buttonValue;
+          currentValue = ''; 
+      } else if (buttonValue === '=') {
+          const result = calculate();
+          updateDisplay(result);
+          currentValue = result;
+          previousValue = '';
+          operator = '';
+      } else if (buttonValue === 'C') {
+          currentValue = '';
+          previousValue = '';
+          operator = '';
+          updateDisplay('');
+      }
+  });
+});
